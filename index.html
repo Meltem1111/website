@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBSİTE</title>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        /* Hoş geldiniz mesajı için stil */
+        #welcome-message {
+            display: none; /* Başlangıçta gizli */
+            background-color: rgba(255, 255, 255, 0.8); /* Arka plan rengi */
+            padding: 20px; /* İçerik etrafında boşluk */
+            border-radius: 5px; /* Kenar yuvarlama */
+            margin-top: 20px; /* Üstte boşluk */
+            text-align: center; /* Ortalamak için */
+            font-size: 48px; /* Yazı boyutu */
+            color: #333; /* Yazı rengi */
+            opacity: 1; /* Başlangıçta tam görünür */
+        }
+
+        /* Fade out animasyonu */
+        @keyframes fadeOut {
+            0% {
+                opacity: 1; /* Tam görünür */
+            }
+            100% {
+                opacity: 0; /* Tam görünmez */
+                display: none; /* Görünmez olduğunda gizle */
+            }
+        }
+
+        /* Diğer bölümler için mevcut stiller... */
+        #contact-info, #survey, #projects {
+            display: none; /* Başlangıçta gizle */
+        }
+
+        /* Reklam popup'u stili */
+        .ad-popup {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
+        /* Proje detayları için stil */
+        .project-details {
+            display: none; /* Başlangıçta gizli */
+            margin-top: 10px; /* Üstte boşluk */
+            padding: 10px; /* İçerik etrafında boşluk */
+            background-color: #f9f9f9; /* Arka plan rengi */
+            border: 1px solid #ddd; /* Kenarlık */
+            border-radius: 5px; /* Kenar yuvarlama */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="new.png" alt="Logo"> <!-- Resim yolu -->
+            </div>
+            <ul>
+                <li><a href="#" class="active" onclick="showSection('home')">Ana Sayfa</a></li>
+                <li><a href="#" onclick="showSection('contact-info')">İletişim</a></li>
+                <li><a href="#" onclick="showSection('projects')">Projeler</a></li>
+                <li><a href="#" onclick="showSection('survey')">Memnuniyet Anketi</a></li>
+            </ul>
+        </div>
+
+        <!-- Hoş geldiniz mesajı -->
+        <div id="welcome-message">
+            HOŞ GELDİNİZ
+        </div>
+
+        <!-- İletişim Bilgileri -->
+        <div id="contact-info">
+            <h2>İletişim Bilgileri</h2>
+            <p>Ad: Meltem</p>
+            <p>Soyad: ERDOĞAN</p>
+            <p>E-posta: erdoganmeltem244@gmail.com</p>
+        </div>
+
+        <!-- Projeler Bölümü -->
+        <div id="projects">
+            <h2>Projeler</h2>
+            <div class="project-type">
+                <button onclick="showPythonProjects()">Python Projeleri</button>
+                <button onclick="showCppProjects()">C++ Projeleri</button>
+            </div>
+            <div id="python-projects" style="display: none;">
+                <h3>Python Projeleri</h3>
+                <p>1. Python Projesi 1: Basit Hesap Makinesi <button onclick="toggleProjectDetails('python-project1-details')">Detaylar</button></p>
+                <div id="python-project1-details" class="project-details">
+                    <p>Açıklama: Bu proje, temel matematik işlemlerini gerçekleştiren bir hesap makinesidir.</p>
+                </div>
+                <p>2. Python Projesi 2: Sudoku Oyunu <button onclick="toggleProjectDetails('python-project2-details')">Detaylar</button></p>
+                <div id="python-project2-details" class="project-details">
+                    <p>Açıklama: Sudoku bulmacalarını çözmek için bir oyun uygulamasıdır.</p>
+                </div>
+            </div>
+            <div id="cpp-projects" style="display: none;">
+                <h3>C++ Projeleri</h3>
+                <p>1. C++ Projesi 1: 1. Proje <button onclick="toggleProjectDetails('cpp-project1-details')">Detaylar</button></p>
+                <div id="cpp-project1-details" class="project-details">
+                    <p>Açıklama: Bu proje, C++ ile yapılan ilk projedir.</p>
+                </div>
+                <p>2. C++ Projesi 2: 2. Proje <button onclick="toggleProjectDetails('cpp-project2-details')">Detaylar</button></p>
+                <div id="cpp-project2-details" class="project-details">
+                    <p>Açıklama: C++ kullanarak geliştirilmiş ikinci projedir.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memnuniyet Anketi -->
+        <div id="survey">
+            <h2>Memnuniyet Anketi</h2>
+            <form>
+                <label for="satisfaction">Memnuniyet Seviyesi:</label><br>
+                <select id="satisfaction" name="satisfaction">
+                    <option value="1">1 - Çok İyi</option>                     
+                    <option value="2">2 - İyi</option>                     
+                    <option value="3">3 - Orta</option>                     
+                    <option value="4">4 - Kötü</option>                     
+                    <option value="5">5 - Berbat</option>
+                </select><br><br>
+                <label for="feedback">Geri Bildirim:</label><br>
+                <textarea id="feedback" name="feedback" rows="4" cols="50" placeholder="Yorumlarınızı buraya yazın..."></textarea><br><br>
+                <input type="submit" value="Gönder">
+            </form>
+        </div>
+
+        <!-- Reklam Popup -->
+        <div id="ad-popup" class="ad-popup">
+            <div class="ad-content">
+                <span class="close-btn" onclick="closeAd()">&times;</span>
+                <a href="https://www.w3schools.com/" target="_blank">
+                    <img src="https://www.w3schools.com/images/w3schools_logo_436_2.png" alt="Reklam" style="max-width: 100%; height: auto;">
+                </a>
+                <p>Sen de W3schools'la öğrenmenin keyfini çıkar</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reklam popup'ını kapatır
+        function closeAd() {
+            document.getElementById('ad-popup').style.display = 'none'; // Reklamı gizle
+            showWelcomeMessage(); // Hoş geldiniz mesajını göster
+        }
+
+        // Hoş geldiniz mesajını göster ve sonra kaybolmasını sağla
+        function showWelcomeMessage() {
+            const welcomeMessage = document.getElementById('welcome-message');
+            welcomeMessage.style.display = 'block'; // Hoş geldiniz mesajını görünür yap
+
+            // 3 saniye sonra hoş geldiniz mesajını kaybolacak şekilde ayarla (fade out)
+            setTimeout(() => {
+                welcomeMessage.style.animation = 'fadeOut 3s forwards'; // Fade out animasyonu
+            }, 3000); // 3 saniye görünür kalması için
+        }
+
+        // Tüm bölümleri gizler ve sadece seçilen bölümü gösterir
+        function showSection(sectionId) {
+            // Tüm bölümleri gizle
+            const sections = ['contact-info', 'projects', 'survey'];
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                section.style.display = 'none';
+            });
+
+            // Seçilen bölümü göster
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.style.display = 'block';
+
+            // Proje bölümü için alt bölümleri gizle
+            const pythonProjects = document.getElementById('python-projects');
+            const cppProjects = document.getElementById('cpp-projects');
+            pythonProjects.style.display = 'none';
+            cppProjects.style.display = 'none';
+        }
+
+        // Python projelerini göster
+        function showPythonProjects() {
+            document.getElementById('python-projects').style.display = 'block';
+            document.getElementById('cpp-projects').style.display = 'none';
+        }
+
+        // C++ projelerini göster
+        function showCppProjects() {
+            document.getElementById('cpp-projects').style.display = 'block';
+            document.getElementById('python-projects').style.display = 'none';
+        }
+
+        // Proje detaylarını aç/kapa
+        function toggleProjectDetails(id) {
+            const details = document.getElementById(id);
+            details.style.display = details.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

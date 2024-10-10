@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: url("kizkulesi.jpg");
+    height: 100vh;
+    background-size: cover; /* Arka plan resmini kapsayacak şekilde ayarlayın */
+    background-repeat: no-repeat; /* Resmin tekrarlanmaması için */
+    background-position: center; /* Resmi ortalamak için */
+    display: flex; /* İçeriklerin ortalanmasını sağlar */
+    align-items: center; /* Dikey ortalamak için */
+    justify-content: center; /* Yatay ortalamak için */
+}
+
+.navbar {
+    width: 100%; /* Tam genişlik */
+    height: 80px; /* Yükseklik */
+    background: rgba(238, 46, 46, 0.9); /* Arka plan rengi */
+    position: fixed; /* Sayfanın en üst kısmında kalmasını sağlar */
+    top: 0; /* Üstte kalmasını sağlamak için */
+    left: 0; /* Solda kalmasını sağlamak için */
+    display: flex; /* Flex kullanarak içerikleri yan yana yerleştirir */
+    align-items: center; /* Dikey ortalamak için */
+    justify-content: space-between; /* Sağda ve solda yerleştirme */
+    z-index: 1000; /* Diğer içeriklerin üstünde görünmesi için */
+}
+
+.logo {
+    margin-left: 20px; /* Logo için sol boşluk */
+}
+.logo img {
+    width: 80px; /* Genişliği ayarlayın */
+    height: 80px; /* Yüksekliği ayarlayın */
+    border-radius: 50%; /* Yuvarlak hale getir */
+    object-fit: cover; /* Resmin orantılı görünmesini sağlar */
+}
+.navbar ul {
+    list-style-type: none; /* Liste işaretlerini kaldırır */
+    display: flex; /* Liste öğelerini yan yana yerleştirir */
+    margin-right: 20px; /* Sağdan boşluk */
+}
+
+.navbar ul li {
+    list-style:none;
+    display:inline-block;
+    margin:0 8px;
+    line-height:80px;
+}
+.navbar ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    padding:6px 13px;
+    font-family:Roboto;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover{
+    background:#ff9900;
+    border-radius:2px;
+}
+
+#contact-info {
+    background-color: #f9f9f9; /* Arka plan rengi */
+    padding: 20px; /* İçerik etrafında boşluk */
+    border: 1px solid #ccc; /* Kenar çerçevesi */
+    border-radius: 5px; /* Kenar yuvarlama */
+    margin-top: 20px; /* Üstte boşluk */
+}
